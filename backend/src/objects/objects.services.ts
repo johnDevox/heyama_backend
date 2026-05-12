@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HeyamaObject } from './object.entity';
@@ -8,6 +8,7 @@ import { EventsGateway } from '../../gateway/events.gateway';
 
 @Injectable()
 export class ObjectsService {
+  private readonly logger = new Logger(ObjectsService.name);
   constructor(
     @InjectRepository(HeyamaObject)
     private readonly objectRepository: Repository<HeyamaObject>,
@@ -43,9 +44,31 @@ export class ObjectsService {
 
   async remove(id: string): Promise<{ message: string }> {
     const obj: HeyamaObject = await this.findOne(id);
-    await this.s3Service.deleteFile(obj.imageUrl);
+
+    try {
+      await this.s3Service.deleteFile(obj.imageUrl);
+    } catch (err: unknown) {
+      // Log the S3 error but continue to delete the DB record.
+      // AccessDenied is common when the credentials lack delete permissions.
+      const errMsg = (() => {
+        try {
+          return JSON.stringify(err, Object.getOwnPropertyNames(err));
+        } catch {
+          return String(err);
+        }
+      })();
+
+      this.logger.warn(`S3 delete failed for key ${obj.imageUrl}: ${errMsg}`);
+    }
+
     await this.objectRepository.delete(id);
-    this.eventsGateway.emitObjectDeleted(id);
+
+    try {
+      this.eventsGateway.emitObjectDeleted(id);
+    } catch (emitErr) {
+      this.logger.warn(`Failed to emit object deleted event: ${emitErr}`);
+    }
+
     return { message: 'Deleted successfully' };
   }
 }
