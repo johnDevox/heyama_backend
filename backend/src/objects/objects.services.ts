@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HeyamaObject } from './object.entity';
 import { CreateObjectDto } from './dto/create-object.dto';
-import { S3Service } from '../../s3/s3.service';
-import { EventsGateway } from '../../gateway/events.gateway';
+import { S3Service } from '../s3/s3.service';
+import { EventsGateway } from '../gateway/events.gateway';
 
 @Injectable()
 export class ObjectsService {

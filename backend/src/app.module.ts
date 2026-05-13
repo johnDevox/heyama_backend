@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { HeyamaObject } from './objects/object.entity';
 import { ObjectsModule } from './objects/objects.modules';
-import { EventsModule } from '../gateway/events.module';
+import { EventsModule } from './gateway/events.module';
 
 @Module({
   imports: [

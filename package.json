@@ -1,4 +1,16 @@
 {
+  "name": "heyama_root",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "start:dev": "npm --prefix backend/src run start:dev",
+    "start": "npm --prefix backend/src run start",
+    "build": "npm --prefix backend/src run build",
+    "lint": "npm --prefix backend/src run lint",
+    "migration:run": "npm --prefix backend/src run migration:run"
+  }
+}
+{
   "name": "nestjs-root-proxy",
   "private": true,
   "scripts": {

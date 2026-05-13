@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { DataSource } from 'typeorm';
-import { HeyamaObject } from './src/objects/object.entity';
+import { HeyamaObject } from './objects/object.entity';
 
 const AppDataSource = new DataSource({
   type: 'postgres',
