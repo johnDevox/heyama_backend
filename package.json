@@ -2,6 +2,7 @@
   "name": "nestjs-root-proxy",
   "private": true,
   "scripts": {
+    "build": "npm --prefix backend install && cd backend && ./node_modules/.bin/nest build",
     "start": "npm --prefix backend run start",
     "start:dev": "npm --prefix backend run start:dev",
     "start:prod": "npm --prefix backend run start:prod",
