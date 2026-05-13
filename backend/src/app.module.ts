@@ -18,7 +18,8 @@ import { EventsModule } from './gateway/events.module';
       database: process.env.DB_NAME,
       entities: [HeyamaObject],
       synchronize: process.env.NODE_ENV !== 'production',
-      ssl: { rejectUnauthorized: false },
+      ssl:
+        process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
     }),
 
     ObjectsModule,

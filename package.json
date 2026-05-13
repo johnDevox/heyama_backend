@@ -10,16 +10,3 @@
     "migration:run": "npm --prefix backend/src run migration:run"
   }
 }
-{
-  "name": "nestjs-root-proxy",
-  "private": true,
-  "scripts": {
-    "build": "npm --prefix backend install && npm --prefix backend run build",
-    "start": "npm --prefix backend run start",
-    "start:dev": "npm --prefix backend run start:dev",
-    "start:prod": "npm --prefix backend run start:prod",
-    "install-backend": "npm --prefix backend install",
-    "lint": "npm --prefix backend run lint",
-    "format": "npm --prefix backend run format"
-  }
-}

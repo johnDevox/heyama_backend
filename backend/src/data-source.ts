@@ -13,6 +13,7 @@ const AppDataSource = new DataSource({
   logging: false,
   entities: [HeyamaObject],
   migrations: ['src/migrations/*.ts'],
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
 });
 
 export default AppDataSource;
