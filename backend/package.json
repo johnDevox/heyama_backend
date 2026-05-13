@@ -11,7 +11,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node /opt/render/project/src/backend/dist/main",
   "migration:generate": "ts-node ./node_modules/typeorm/cli -d ./data-source.ts migration:generate",
   "migration:run": "ts-node ./node_modules/typeorm/cli -d ./data-source.ts migration:run",
   "migration:create": "ts-node ./node_modules/typeorm/cli -d ./data-source.ts migration:create",
