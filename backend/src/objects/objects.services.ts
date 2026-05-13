@@ -16,6 +16,7 @@ export class ObjectsService {
     private readonly eventsGateway: EventsGateway,
   ) {}
 
+  // Upload l'image sur S3, crée l'entité et la sauvegarde en base
   async create(
     dto: CreateObjectDto,
     file: Express.Multer.File,
@@ -30,10 +31,12 @@ export class ObjectsService {
     return saved;
   }
 
+  // Retourne tous les objets, triés par date de création décroissante
   async findAll(): Promise<HeyamaObject[]> {
     return this.objectRepository.find({ order: { createdAt: 'DESC' } });
   }
 
+  // Retourne un objet par son ID ou lève une NotFoundException
   async findOne(id: string): Promise<HeyamaObject> {
     const obj: HeyamaObject | null = await this.objectRepository.findOneBy({
       id,
@@ -42,6 +45,7 @@ export class ObjectsService {
     return obj;
   }
 
+  // Supprime l'objet : tente de supprimer le fichier S3 puis supprime la ligne en base
   async remove(id: string): Promise<{ message: string }> {
     const obj: HeyamaObject = await this.findOne(id);
 

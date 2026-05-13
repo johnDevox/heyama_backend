@@ -16,6 +16,7 @@ export class S3Service {
     });
   }
 
+  // Upload le fichier fourni vers le bucket S3 et retourne l'URL publique
   async uploadFile(file: Express.Multer.File): Promise<string> {
     const bucket = process.env.AWS_S3_BUCKET_NAME!;
     const domain = process.env.AWS_S3_CUSTOM_DOMAIN!;
@@ -37,6 +38,7 @@ export class S3Service {
     return `https://${domain}/${key}`;
   }
 
+  // Supprime l'objet S3 correspondant à l'URL fournie
   async deleteFile(imageUrl: string): Promise<void> {
     const bucket = process.env.AWS_S3_BUCKET_NAME!;
 

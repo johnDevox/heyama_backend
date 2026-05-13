@@ -1,7 +1,5 @@
-## aperçu
 
 ![Preview](/backend/assets/images/image.png)
-
 
 ## À propos du projet
 

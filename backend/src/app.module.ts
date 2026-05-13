@@ -17,7 +17,8 @@ import { EventsModule } from '../gateway/events.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [HeyamaObject],
-      synchronize: true, // ⚠️ crée les tables automatiquement (ok en dev)
+      synchronize: process.env.NODE_ENV !== 'production',
+      ssl: { rejectUnauthorized: false },
     }),
 
     ObjectsModule,
